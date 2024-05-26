@@ -1,9 +1,0 @@
-colorama==0.4.6
-evdev==1.7.1
-lolcat==1.4
-pyfiglet==1.0.2
-pynput==1.7.7
-python-xlib==0.33
-six==1.16.0
-termcolor==2.4.0
-Termicolor==1.0.0
