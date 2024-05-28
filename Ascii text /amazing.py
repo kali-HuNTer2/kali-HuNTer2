@@ -1,14 +1,16 @@
 import pyfiglet
+from termcolor import colored
+from pynput import keyboard
 
-# Define the word
-word = "HuNTer"
+# Function to print ASCII art in blue
+def print_ascii_art():
+    # Define the text and the font
+    text = "kali-HuNTer"
+    font = "speed"
 
-# List of selected fonts
-fonts = ['slant']
+    # Generate ASCII art text
+    ascii_art = pyfiglet.figlet_format(text, font=font)
 
-# Print the word in each font
-for font in fonts:
-    ascii_art = pyfiglet.figlet_format(word, font=font)
-    print(f"Font: {font}\n")
-    print(ascii_art)
-    print("\n" + "#" * 80 + "\n")
+    # Print the ASCII art text in blue color
+    print(colored(ascii_art, 'blue'))
+    print("Author : Vivek Kumar")
