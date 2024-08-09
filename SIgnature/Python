@@ -1,0 +1,49 @@
+import os
+import subprocess
+
+# Colors
+RESET = '\033[0m'
+BOLD = '\033[1m'
+RED = '\033[31m'
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+BLUE = '\033[34m'
+MAGENTA = '\033[35m'
+CYAN = '\033[36m'
+WHITE = '\033[37m'
+
+# Generate the "HUNTER" text using figlet with the 'Bloody' font
+hunter_text = subprocess.getoutput("echo 'HUNTER' | figlet -f Bloody")
+
+# Author name or tagline
+author_name = "             Author Name : VIVEK KUMAR"
+
+# Get the terminal width
+terminal_width = os.get_terminal_size().columns
+
+# Calculate the length of the longest line in the hunter_text
+line_length = max(len(line) for line in hunter_text.splitlines())
+border_length = line_length + 8  # Adjusting the border length for gaps
+
+# Create the top and bottom border
+top_bottom_border = "═" * border_length
+side_border = "│"
+
+# Prepare the text with custom borders and gaps
+output = "\n".join([f"{side_border}    {line}    {side_border}" for line in hunter_text.splitlines()])
+author_line = f"{side_border}    {author_name.ljust(line_length)}    {side_border}"
+
+# Calculate padding needed to center the text block
+total_block_width = border_length + 8  # Including side borders and extra padding
+padding = (terminal_width - total_block_width) // 2
+
+# Helper function to center a line of text
+def center_text(text, padding):
+    return f"{' ' * padding}{text}"
+
+# Print each line with calculated padding and color
+print(center_text(f"{GREEN}╒{top_bottom_border}╕{RESET}", padding))
+for line in output.splitlines():
+    print(center_text(f"{GREEN}{line}{RESET}", padding))
+print(center_text(f"{RED}{author_line}{RESET}", padding))
+print(center_text(f"{GREEN}╘{top_bottom_border}╛{RESET}", padding))
