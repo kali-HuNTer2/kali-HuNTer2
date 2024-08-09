@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Colors
+RESET='\033[0m'
+BOLD='\033[1m'
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+MAGENTA='\033[35m'
+CYAN='\033[36m'
+WHITE='\033[37m'
+
+# Generate the "HUNTER" text using figlet with the 'Bloody' font
+hunter_text=$(echo "HUNTER" | figlet -f Bloody)
+
+# Author name or tagline
+author_name="             Author Name : VIVEK KUMAR"
+
+# Get the terminal width
+terminal_width=$(tput cols)
+
+# Calculate the length of the longest line in the hunter_text
+line_length=$(echo "$hunter_text" | awk 'NR==1 {max=length($0)} {if(length($0)>max) max=length($0)} END {print max}')
+border_length=$((line_length + 8))  # Adjusting the border length for gaps
+
+# Create the top and bottom border
+top_bottom_border=$(printf "═%.0s" $(seq 1 $border_length))
+side_border="│"
+
+# Prepare the text with custom borders and gaps
+output=$(echo "$hunter_text" | sed "s/^/$side_border    /; s/$/    $side_border/")
+author_line="$side_border    $(printf "%-*s" "$line_length" "$author_name")    $side_border"
+
+# Calculate padding needed to center the text block
+total_block_width=$((border_length + 8))  # Including side borders and extra padding
+padding=$(( (terminal_width - total_block_width) / 2 ))
+
+# Helper function to center a line of text
+center_text() {
+  local text="$1"
+  local padding="$2"
+  printf "%${padding}s%s\n" "" "$text"
+}
+
+# Print each line with calculated padding and color
+echo -e "$(center_text "${GREEN}╒$top_bottom_border╕${RESET}" $padding)"
+while IFS= read -r line; do
+  echo -e "$(center_text "${GREEN}$line${RESET}" $padding)"
+done <<< "$output"
+echo -e "$(center_text "${RED}$author_line${RESET}" $padding)"
+echo -e "$(center_text "${GREEN}╘$top_bottom_border╛${RESET}" $padding)"
