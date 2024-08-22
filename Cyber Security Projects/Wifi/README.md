@@ -28,12 +28,8 @@ DNSServer Library: Included in the ESP8266 core package.
 ESP8266WebServer Library: Included in the ESP8266 core package.
 ESP8266HTTPClient Library: Included in the ESP8266 core package.
 Installation
-Clone the Repository:
 
-sh
-Copy code
-git clone https://github.com/Kali-HuNTer2/wifi/ESP8266_PhiSizfi.ino.git
-cd wifi-deauther-evil-twin
+
 Set Up Arduino IDE:
 
 Install the ESP8266 Board Package via the Board Manager.
