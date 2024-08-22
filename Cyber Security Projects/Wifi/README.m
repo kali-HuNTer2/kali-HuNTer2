@@ -32,7 +32,7 @@ Clone the Repository:
 
 sh
 Copy code
-git clone https://github.com/Kali-HuNTer2/wifi-deauther-evil-twin.git
+git clone https://github.com/Kali-HuNTer2/wifi/ESP8266_PhiSizfi.ino.git
 cd wifi-deauther-evil-twin
 Set Up Arduino IDE:
 
